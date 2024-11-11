@@ -12,7 +12,7 @@
 'models/': The definition of the model structure, which currently supports a variety of fully supervised segmentation models, is invoked via 'get_model()' under 'net_factory'.
 'utilities/': Training test toolkit, including evaluation metrics 'metric.py', gradient-like activation graphs 'gradcam.py', logging of training process 'logger.py', multiple loss functions 'losses.py', computational complexity measurement tool 'to_onnx.py', and so on.
 ## 3. Supported datasets
-Currently supported datasets are 'NEU-SEG', 'KolektorSDD series', 'DAGM', 'RSDD series', 'CrackForest' and others.
+Currently supported datasets are 'NEU-SEG', 'KolektorSDD series', 'DAGM', 'RSDD series', 'CrackForest' and others. We will follow up with datasets.
 
 ## 3. Supported models
 'U-Net', 'Seg-Net', 'PGA-Net', 'DeepLabV3', 'BiseNet', 'EDR-Net', 'SegFormer', 'Swin-UNet', 'TopFormer', 'HDRNet'.
