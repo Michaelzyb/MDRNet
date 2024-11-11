@@ -3,7 +3,7 @@
 - email: 1287293308@qq.com / wangyi@s.upc.edu.cn
 
 ## 1. Network arch
-![Network arch](figure/HDRNet.pdf)
+![Network arch](HDRNet.png)
 
 ## 2. Usage
 'main.py': Execute the main program, all model training and testing starts from this file, which contains the hyperparameter settings internally, and training is started by calling this program and passing the parameters.
