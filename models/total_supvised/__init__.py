@@ -6,5 +6,5 @@ from .abunet import ABUNet
 from .seg_former import segformer_b0
 from .pga_net import PGANet
 from .topformer import TopFormer
-from .hdrnet import HDR_Net
+from .mdrnet import MDR_Net
 from .u_net import UNet
