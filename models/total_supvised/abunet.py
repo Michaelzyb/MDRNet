@@ -69,7 +69,6 @@ class SpatialAttention(nn.Module):
     def __init__(self, kernel_size: int = 3):
         super(SpatialAttention, self).__init__()
 
-        # 卷积层，用于计算空间注意力
         self.conv = nn.Conv2d(in_channels=2, out_channels=1, kernel_size=kernel_size, padding=1, bias=False)
         self.sigmoid = nn.Sigmoid()
 
@@ -97,7 +96,7 @@ class attention(nn.Module):
         out = self.ca(x)
         out = self.sa(out)
         return out
-class abunet(nn.Module):
+class ABUNet(nn.Module):
     def __init__(self, in_channel, num_class):
         super(abunet, self).__init__()
         channels = [64, 128, 256, 512, 1024]
