@@ -157,9 +157,9 @@ class Seq2Img(nn.Module):
         x = x.view(B, C, self.height, self.width)
         return x
 
-class Hybrid_Transformer_Module(nn.Module):#2.Hybrid Transformer Module
+class MSCA_Transformer_Module(nn.Module):#2.MSCA Transformer Module
     def __init__(self, in_channels, height, width, num_heads, Transformer_Block_num):#in_channels(embed_dim)
-        super(Hybrid_Transformer_Module, self).__init__()
+        super(MSCA_Transformer_Module, self).__init__()
         self.MultiScaleChannelAttention = MultiScaleChannelAttention_1(in_channels)
         self.conv = nn.Conv2d(in_channels, in_channels, 3, 1, 1)
         self.Img2seq = Img2Seq()
@@ -178,9 +178,9 @@ class Hybrid_Transformer_Module(nn.Module):#2.Hybrid Transformer Module
         out = self.Seq2Img(x)
         return out
 
-class Hybrid_Transformer_Module_1(nn.Module):#3.The last two hybrid Transformer modules
+class MSCA_Transformer_Module_1(nn.Module):#3.The last two MSCA Transformer modules
     def __init__(self, in_channels, height, width, num_heads, Transformer_Block_num):#in_channels(embed_dim)
-        super(Hybrid_Transformer_Module_1, self).__init__()
+        super(MSCA_Transformer_Module_1, self).__init__()
         self.MultiScaleChannelAttention = MultiScaleChannelAttention_2(in_channels)
         self.conv = nn.Conv2d(in_channels, in_channels, 3, 1, 1)
         self.Img2seq = Img2Seq()
@@ -410,13 +410,13 @@ class RegionAttention(nn.Module):
         out = out_4x4 + out_8x8
         return out
 
-class HDR_Net(nn.Module):
+class MDR_Net(nn.Module):
     def __init__(self, in_c, num_classes):
         super(HDR_Net, self).__init__()
         self.conv_stem = conv_stem(in_c, 32)
-        self.Hybrid_Transformer_Module_1 = Hybrid_Transformer_Module(32, 56, 56, 4, 1)#Adjust height and width according to input image size
-        self.Hybrid_Transformer_Module_2 = Hybrid_Transformer_Module_1(32, 28, 28, 4, 2)#Adjust height and width according to input image size
-        self.Hybrid_Transformer_Module_3 = Hybrid_Transformer_Module_1(64, 14, 14, 4, 3)#Adjust height and width according to input image size
+        self.MSCA_Transformer_Module_1 = MSCA_Transformer_Module(32, 56, 56, 4, 1)#Adjust height and width according to input image size
+        self.MSCA_Transformer_Module_2 = MSCA_Transformer_Module_1(32, 28, 28, 4, 2)#Adjust height and width according to input image size
+        self.MSCA_Transformer_Module_3 = MSCA_Transformer_Module_1(64, 14, 14, 4, 3)#Adjust height and width according to input image size
         self.Patch_Merging_1 = PatchMerging(32, 32)
         self.Patch_Merging_2 = PatchMerging(32, 64)
         self.DSGC_1 = DenseShuffleConv_1()
@@ -435,11 +435,11 @@ class HDR_Net(nn.Module):
 
     def forward(self, input_tensor):
         output_tensor = self.conv_stem(input_tensor)
-        output_tensor_1 = self.Hybrid_Transformer_Module_1(output_tensor)
+        output_tensor_1 = self.MSCA_Transformer_Module_1(output_tensor)
         output_tensor_2 = self.Patch_Merging_1(output_tensor_1)
-        output_tensor_2 = self.Hybrid_Transformer_Module_2(output_tensor_2)
+        output_tensor_2 = self.MSCA_Transformer_Module_2(output_tensor_2)
         output_tensor_3 = self.Patch_Merging_2(output_tensor_2)
-        output_tensor_3 = self.Hybrid_Transformer_Module_3(output_tensor_3)
+        output_tensor_3 = self.MSCA_Transformer_Module_3(output_tensor_3)
         y_1 = self.conv1(self.DSGC_1(output_tensor_1, output_tensor_2, output_tensor_3))
         y_2 = self.conv2(self.DSGC_2(output_tensor_1, output_tensor_2, output_tensor_3))
         y_3 = self.conv3(self.DSGC_3(output_tensor_1, output_tensor_2, output_tensor_3))
