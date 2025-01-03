@@ -412,7 +412,7 @@ class RegionAttention(nn.Module):
 
 class MDR_Net(nn.Module):
     def __init__(self, in_c, num_classes):
-        super(HDR_Net, self).__init__()
+        super(MDR_Net, self).__init__()
         self.conv_stem = conv_stem(in_c, 32)
         self.MSCA_Transformer_Module_1 = MSCA_Transformer_Module(32, 56, 56, 4, 1)#Adjust height and width according to input image size
         self.MSCA_Transformer_Module_2 = MSCA_Transformer_Module_1(32, 28, 28, 4, 2)#Adjust height and width according to input image size
