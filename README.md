@@ -1,9 +1,9 @@
-# HDRNet: Efficient Surface Defect Segmentation Network Based on CNN and Transformer
+# MDRNet: Efficient Surface Defect Segmentation Network Based on CNN and Transformer
 - author: Yubo Zheng / Rongdi Wang
-- email: 1287293308@qq.com / wangyi@s.upc.edu.cn
+- email: purebreeze888@163.com / wangyi@s.upc.edu.cn
 
 ## 1. Network arch
-![Network arch](HDRNet.png)
+![Network arch](MDRNet.png)
 
 ## 2. Usage
 'main.py': Execute the main program, all model training and testing starts from this file, which contains the hyperparameter settings internally, and training is started by calling this program and passing the parameters.
@@ -15,15 +15,15 @@
 Currently supported datasets are 'NEU-SEG', 'KolektorSDD series', 'DAGM', 'RSDD series', 'CrackForest' and others. We will follow up with datasets.
 
 ## 3. Supported models
-'U-Net', 'Seg-Net', 'PGA-Net', 'DeepLabV3', 'BiseNet', 'EDR-Net', 'SegFormer', 'Swin-UNet', 'TopFormer', 'HDRNet'.
+'U-Net', 'Seg-Net', 'PGA-Net', 'DeepLabV3', 'BiseNet', 'EDR-Net', 'SegFormer', 'ABUNet', 'TopFormer', 'MDRNet'.
 
 
 
 ## 4. Environmental needs
 ''Python >= 3.6 PyTorch >= 1.1.0 Albumentations tqdm tensorboardX cv2 numpy''
 ## 5. Run
-For example, I need to run the HDRNet model on the NEU-SEG dataset, which can be entered in the terminal Terminal:
-'python main.py --model hdrnet --benchmark neuseg --base_lr 0.001 --epochs 100 --log_path logs --dataset_root_path C:/../.. --mode totat-sup --batch_size 4'
+For example, I need to run the MDRNet model on the NEU-SEG dataset, which can be entered in the terminal Terminal:
+'python main.py --model mdrnet --benchmark neuseg --base_lr 0.001 --epochs 100 --log_path logs --dataset_root_path C:/../.. --mode totat-sup --batch_size 4'
 Alternatively, we can change the parameters in main.py to train multiple models in succession.
 We need to pass in a number of parameters at the same time in the 'main.py' program, '--model' for the trained model, '--benchmark' for the dataset, and '--dataset_root_path' for the path where the dataset will be stored after it is downloaded.
 
